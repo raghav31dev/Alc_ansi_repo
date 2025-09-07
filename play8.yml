@@ -1,0 +1,12 @@
+---
+- name: demonstrate file module
+  hosts: localhost
+  become: true
+  tasks:
+   - name: Create a Directory
+     file:
+       src: /etc/passwd
+       dest: /etc/l_passwd
+       state: hard
+... 
+#End

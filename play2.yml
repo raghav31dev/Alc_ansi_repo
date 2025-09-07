@@ -1,0 +1,22 @@
+---
+- name: Play to create a group and then user
+  hosts: sapdev
+  gather_facts: false
+  become: true
+  become_user: root
+  tasks:
+   - name: Task1 - Create group
+   #Crate a group.
+     ansible.builtin.group:
+      name: sapdev
+      state: present
+   - name: Task2 - Create user and add the above created group as primary group 
+   #User Module to create user
+     ansible.builtin.user:
+      name: carl
+      group: sapdev
+      comment: Carl for SapDev Project
+      state: present
+      password: $6$kdlafklakdj$jVBXr3pp3MyLrgxpTrdJJyGg6oiHyEKOA/Hk0XktvUZJExw6upj736L0Zgk6aLCJdH7yVtYTQVF/boZqubKNG/
+#End of the play.
+...

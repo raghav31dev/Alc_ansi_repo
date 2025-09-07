@@ -1,0 +1,38 @@
+---
+- name: Create a volume group using pv /dev/sdh
+  hosts: localhost 
+  become: true
+  tasks:
+    - name: Create vg
+      lvg:
+        vg: logsvg
+        pvs: /dev/sdh
+        pesize: 32
+    
+    - name: Create a volume
+      lvol:
+        vg: logsvg
+        lv: loglv01
+        size: 512 
+        pvs: /dev/sdh
+
+    - name: create filesystem
+      filesystem:
+        fstype: xfs
+        dev: /dev/logsvg/loglv01
+    
+    - name : Create mount point if it doesnt exists. Do this before it attempts to mount
+      file:
+        path: /logsfs
+        state: directory
+        mode: 0755
+
+    - name: Mount the filesystem
+      mount:
+        path: /logsfs
+        src: /dev/logsvg/loglv01
+        fstype: xfs
+        state: mounted
+
+
+

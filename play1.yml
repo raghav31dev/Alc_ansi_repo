@@ -1,0 +1,15 @@
+---
+- name: My First Playbook
+  hosts: sapprod
+  become: true
+  gather_facts: false
+  become_user: root
+  tasks:
+   - name: Create User
+     user:
+       name: alc-user
+       password: $6$kdlafklakdj$jVBXr3pp3MyLrgxpTrdJJyGg6oiHyEKOA/Hk0XktvUZJExw6upj736L0Zgk6aLCJdH7yVtYTQVF/boZqubKNG/
+       gecos: "This is service account for sap Admin"
+      # state: present
+       state: absent
+... 

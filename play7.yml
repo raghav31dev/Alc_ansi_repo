@@ -1,0 +1,14 @@
+---
+- name: demonstrate file module
+  hosts: localhost
+  become: true
+  tasks:
+   - name: Create a Directory
+     file:
+       src: /etc/PicsDir
+       dest: /etc/mylink
+       state: link #Soft link file will be created
+       owner: root
+       group: ansible
+... 
+#End

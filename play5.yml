@@ -1,0 +1,15 @@
+---
+- name: demonstrate file module
+  hosts: localhost
+  become: true
+  tasks:
+   - name: Create an empty file
+     file:
+       path: /etc/new_ansi.txt
+     #  state: touch
+       state: absent
+       owner: root
+       group: ansible
+       mode: '0640'
+... 
+#End
