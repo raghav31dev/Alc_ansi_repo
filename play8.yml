@@ -2,6 +2,7 @@
 - name: demonstrate file module
   hosts: localhost
   become: true
+  remote_user: ansible
   tasks:
    - name: Create a Directory
      file:
