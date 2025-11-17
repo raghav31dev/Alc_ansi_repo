@@ -1,0 +1,15 @@
+---
+- name: Install and start Apache (httpd)
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Apache (httpd)
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+
+    - name: Ensure Apache is running
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
