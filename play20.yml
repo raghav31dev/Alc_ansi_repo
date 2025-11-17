@@ -1,18 +1,17 @@
 ---
-- name: Create a user and add ssh public key to user's authorized keys
+- name: Create a user and add SSH public key
   hosts: localhost
   become: true
-  remote_user: ansible
   remote_user: jenkins
   tasks:
-   - name: Add a user
-     user:
-       name: asian
-       password: "{{ 'test123' | password_hash('sha512')}}"
-       state: present
-   - name: Task to add SSH keys to the user
-     authorized_key:
-      user: asian
-      state: present
-      key: "{{lookup('file', '/home/ansible/id_rsa.pub')}}" 
-...
+    - name: Add a user
+      user:
+        name: asian
+        password: "{{ 'test123' | password_hash('sha512') }}"
+        state: present
+
+    - name: Add SSH public key to user
+      authorized_key:
+        user: asian
+        state: present
+        key: "{{ lookup('file', '/home/jenkins/id_rsa.pub') }}"
