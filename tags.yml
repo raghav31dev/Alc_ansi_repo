@@ -1,0 +1,40 @@
+---
+- name: Practice tags in Ansible
+  hosts: localhost
+  become: true
+  vars:
+    user_name: bob
+    user_password: Secure123
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+      tags: apache
+
+    - name: Start Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+      tags: apache
+
+    - name: Create a new user
+      user:
+        name: "{{ user_name }}"
+        password: "{{ user_password | password_hash('sha512') }}"
+        state: present
+      tags: user
+
+    - name: Add SSH public key for user
+      authorized_key:
+        user: "{{ user_name }}"
+        key: "{{ lookup('file','/home/jenkins/id_rsa.pub') }}"
+        state: present
+      tags: ssh
+
+    - name: Deploy homepage
+      copy:
+        content: "<h1>Hello from Ansible tags practice!</h1>"
+        dest: /var/www/html/index.html
+      tags: deploy
