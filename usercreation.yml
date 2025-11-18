@@ -2,18 +2,23 @@
 - name: Create users dynamically
   hosts: localhost
   become: true
+
   vars:
     user_name: "smith"
     user_password: "test123"
+    ssh_key_path: "/home/jenkins/.ssh/id_rsa.pub"
+
   tasks:
+
     - name: Add user
       user:
         name: "{{ user_name }}"
         password: "{{ user_password | password_hash('sha512') }}"
         state: present
+        create_home: yes
 
-    - name: Add SSH key
+    - name: Add SSH key for the user
       authorized_key:
         user: "{{ user_name }}"
         state: present
-        key: "{{ lookup('file', '/home/jenkins/id_rsa.pub') }}"
+        key: "{{ lookup('file', ssh_key_path) }}"
