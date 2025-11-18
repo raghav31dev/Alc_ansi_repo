@@ -1,6 +1,6 @@
 ---
 - name: Create users dynamically
-  hosts: localhost
+  hosts: jagent
   become: true
 
   vars:
