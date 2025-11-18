@@ -1,10 +1,10 @@
 ---
 - name: Create users dynamically
-  hosts: localhost
+  hosts: all
   become: true
 
   vars:
-    user_name: "stevesmith"
+    user_name: "david"
     user_password: "test123"
     ssh_key_path: "/home/jenkins/.ssh/id_rsa.pub"
 
