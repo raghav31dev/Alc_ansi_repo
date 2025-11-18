@@ -3,7 +3,7 @@
   hosts: localhost
   become: true
   vars:
-    user_name: "asian2"
+    user_name: "smith"
     user_password: "test123"
   tasks:
     - name: Add user
