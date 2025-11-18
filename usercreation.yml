@@ -4,7 +4,7 @@
   become: true
 
   vars:
-    user_name: "smith"
+    user_name: "stevesmith"
     user_password: "test123"
     ssh_key_path: "/home/jenkins/.ssh/id_rsa.pub"
 
