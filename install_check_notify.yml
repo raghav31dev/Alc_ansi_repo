@@ -2,6 +2,7 @@
   hosts: webservers
   become: yes
   gather_facts: yes
+
   vars:
     sns_topic_arn: "arn:aws:sns:ap-south-1:212844904937:jenkins-ansible-alerts"
 
@@ -27,13 +28,3 @@
     - name: Build SNS message
       set_fact:
         msg: |
-          Host: {{ inventory_hostname }}
-          Reachable: {{ ping_result.ping | default('unreachable') }}
-          Package install changed: {{ pkg_install.changed }}
-          Service state: {{ svc_status.state }}
-
-    - name: Send SNS notification
-      community.aws.sns:
-        topic_arn: "{{ sns_topic_arn }}"
-        message: "{{ msg }}"
-        region: ap-south-1
