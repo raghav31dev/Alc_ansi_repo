@@ -1,0 +1,12 @@
+- name: Create a user from vault
+  user:
+    name: "{{ vault_user_name }}"
+    password: "{{ vault_user_password | password_hash('sha512') }}"
+    state: present
+    shell: /bin/bash
+
+- name: Create home directory for user
+  file:
+    path: "/home/{{ vault_user_name }}/testdir"
+    state: directory
+    mode: '0755'
