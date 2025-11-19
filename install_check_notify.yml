@@ -1,4 +1,3 @@
----
 - name: Install package and notify SNS
   hosts: webservers
   become: yes
@@ -31,8 +30,8 @@
           Package install changed: {{ pkg_install.changed }}
           Service state: {{ svc_status.state }}
 
-    - name: Send SNS
-      aws_sns:
-        sns_topic_arn: "{{ sns_topic_arn }}"
+    - name: Send SNS notification
+      community.aws.sns:                      # <-- use community.aws.sns instead of aws_sns
+        topic_arn: "{{ sns_topic_arn }}"      # note the parameter name is topic_arn here
         message: "{{ msg }}"
         region: ap-south-1
