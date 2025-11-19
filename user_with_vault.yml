@@ -1,0 +1,11 @@
+- name: Create user from vault
+  hosts: all
+  become: yes
+  vars_files:
+    - /home/jenkins/ansible/vault.yml
+  tasks:
+    - name: Add user
+      user:
+        name: "sapuser"
+        password: "{{ vault_user_password | password_hash('sha512') }}"
+        state: present
