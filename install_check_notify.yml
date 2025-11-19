@@ -2,6 +2,8 @@
   hosts: webservers
   become: yes
   gather_facts: yes
+  vars:
+    sns_topic_arn: "arn:aws:sns:ap-south-1:212844904937:jenkins-ansible-alerts"
 
   tasks:
 
@@ -31,7 +33,7 @@
           Service state: {{ svc_status.state }}
 
     - name: Send SNS notification
-      community.aws.sns:                      # <-- use community.aws.sns instead of aws_sns
-        topic_arn: "{{ sns_topic_arn }}"      # note the parameter name is topic_arn here
+      community.aws.sns:
+        topic_arn: "{{ sns_topic_arn }}"
         message: "{{ msg }}"
         region: ap-south-1
