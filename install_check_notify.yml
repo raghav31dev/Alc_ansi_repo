@@ -37,3 +37,4 @@
         topic: "{{ sns_topic_arn }}"
         msg: "{{ msg }}"
         region: ap-south-1
+        subject: "Jenkins Ansible Notification"
