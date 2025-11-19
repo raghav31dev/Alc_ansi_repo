@@ -34,6 +34,6 @@
 
     - name: Send SNS notification
       community.aws.sns:
-        topic_arn: "{{ sns_topic_arn }}"
-        message: "{{ msg }}"
+        topic: "{{ sns_topic_arn }}"
+        msg: "{{ msg }}"
         region: ap-south-1
