@@ -1,5 +1,5 @@
 - name: Install package and start service
-  hosts: "{{ lookup('file', '/home/jenkins/ansible/new_instance_ip.txt') }}"
+  hosts: "{{ lookup('file', '/home/jenkins/ansible/new_instance_ip.txt') | trim }}"
   become: yes
   gather_facts: yes
 
