@@ -54,4 +54,10 @@ echo "Saved new EC2 private IP to file: $PRIVATE_IP"
 
 # Update inventory with PRIVATE IP
 echo "Updating inventory..."
-if ! grep -q "\[$GROUP_NAME\]" "$INVENTORY_FILE]()
+
+if ! grep -q "\[$GROUP_NAME\]" "$INVENTORY_FILE"; then
+    echo "[$GROUP_NAME]" >> "$INVENTORY_FILE"
+fi
+
+echo "$PRIVATE_IP" >> "$INVENTORY_FILE"
+
