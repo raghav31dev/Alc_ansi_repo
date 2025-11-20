@@ -1,0 +1,23 @@
+- name: Install package and start service
+  hosts: webservers
+  become: yes
+  gather_facts: yes
+  tasks:
+  
+    - name: Ping host
+      ping:
+      register: ping_result
+
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+      register: pkg_install
+
+    - name: Ensure httpd running
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      register: svc_status
+      
