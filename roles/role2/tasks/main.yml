@@ -3,7 +3,7 @@
     name: httpd
     state: present
 
-- name: Ensure nginx is running
+- name: Ensure httpd is running
   service:
     name: httpd
     state: started
