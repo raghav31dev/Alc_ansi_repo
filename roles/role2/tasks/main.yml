@@ -1,11 +1,11 @@
-- name: Install nginx package
+- name: Install httpd package
   package:
-    name: nginx
+    name: httpd
     state: present
 
 - name: Ensure nginx is running
   service:
-    name: nginx
+    name: httpd
     state: started
     enabled: yes
 
