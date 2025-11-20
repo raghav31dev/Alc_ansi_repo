@@ -2,11 +2,16 @@
   hosts: "{{ lookup('file', '/home/jenkins/ansible/new_instance_ip.txt') }}"
   become: yes
   gather_facts: yes
+
   tasks:
-  
+
     - name: Ping host
       ping:
       register: ping_result
+
+    - name: Show ping result
+      debug:
+        msg: "Ping status: {{ ping_result.ping }}"
 
     - name: Install httpd
       yum:
@@ -14,10 +19,25 @@
         state: present
       register: pkg_install
 
+    - name: Show package install status
+      debug:
+        msg: >
+          HTTPD package installation:
+          changed={{ pkg_install.changed }},
+          rc={{ pkg_install.rc }},
+          msg={{ pkg_install.msg | default('OK') }}
+
     - name: Ensure httpd running
       service:
         name: httpd
         state: started
         enabled: yes
       register: svc_status
-      
+
+    - name: Show service status
+      debug:
+        msg: >
+          HTTPD service:
+          changed={{ svc_status.changed }},
+          state={{ svc_status.state }},
+          status={{ svc_status.status | default('running') }}
