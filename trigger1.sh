@@ -6,6 +6,7 @@ REGION="ap-south-1"
 LAUNCH_TEMPLATE_ID="lt-0e1d3b0b3f6fe9384"
 INVENTORY_FILE="/home/jenkins/ansible/ansi.inv"
 GROUP_NAME="aws_nodes"
+IP_FILE="/home/jenkins/ansible/new_instance_ip.txt"
 
 # Launch instance
 echo "Launching EC2 instance..."
@@ -21,7 +22,7 @@ echo "Instance ID: $instance_id"
 echo "Waiting for instance to enter running state..."
 aws ec2 wait instance-running --instance-ids $instance_id --region $REGION
 
-# Get PRIVATE IP (IMPORTANT FIX)
+# Get PRIVATE IP
 PRIVATE_IP=$(aws ec2 describe-instances \
     --instance-ids $instance_id \
     --region $REGION \
@@ -47,12 +48,10 @@ aws ec2-instance-connect send-ssh-public-key \
     --region $REGION \
     --ssh-public-key file:///home/jenkins/.ssh/id_rsa.pub
 
+# 🔥 Save private IP for trigger2
+echo "$PRIVATE_IP" > "$IP_FILE"
+echo "Saved new EC2 private IP to file: $PRIVATE_IP"
+
 # Update inventory with PRIVATE IP
 echo "Updating inventory..."
-if ! grep -q "\[$GROUP_NAME\]" "$INVENTORY_FILE"; then
-    echo "[$GROUP_NAME]" >> $INVENTORY_FILE
-fi
-
-sed -i "/\[$GROUP_NAME\]/a $PRIVATE_IP ansible_user=ec2-user ansible_ssh_private_key_file=/home/jenkins/.ssh/id_rsa" $INVENTORY_FILE
-
-echo "Inventory updated with: $PRIVATE_IP"
+if ! grep -q "\[$GROUP_NAME\]" "$INVENTORY_FILE]()
