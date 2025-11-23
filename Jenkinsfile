@@ -14,7 +14,7 @@ pipeline {
             steps {
                     sh '''
                         echo "Running Ansible..."
-                        ansible-playbook -i web-asnible-project/inventory/hosts web-asnible-project/playbooks/web.yml
+                        ansible-playbook -i web-ansible-project/inventory/hosts web-ansible-project/playbooks/web.yml
                     '''
             }
         }
