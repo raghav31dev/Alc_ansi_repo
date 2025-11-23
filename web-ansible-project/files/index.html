@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Its Rockstar Dashing Harika's Birthday — Memory Page</title>
+  <style>
+    :root{--accent:#ff6b6b;--muted:#666}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; color:#222; background:#fafafa}
+    .container{max-width:1100px;margin:24px auto;padding:20px}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:68px;height:68px;border-radius:12px;background:linear-gradient(135deg,#ffd7d7,#ffecb3);display:flex;align-items:center;justify-content:center;font-weight:700;color:#7a2f2f}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{color:var(--muted);margin-top:6px}
+
+    .story{background:white;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(20,20,20,0.05);margin-top:18px}
+    .row{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px}
+    .col{flex:1 1 320px}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
+    .thumb{position:relative;border-radius:10px;overflow:hidden;background:#eee;cursor:pointer}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+    .thumb:hover img{transform:scale(1.03)}
+    .caption{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,0.45);color:white;padding:6px 8px;border-radius:8px;font-size:13px}
+
+    .media{display:flex;gap:12px;flex-wrap:wrap}
+    .media .big{flex:1 1 360px;border-radius:12px;overflow:hidden}
+    .video, .big img{width:100%;height:100%;display:block}
+
+    footer{margin-top:22px;color:var(--muted);font-size:13px}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:95%;max-height:85%;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+
+    /* slideshow controls small */
+    .controls{display:flex;gap:8px;margin-top:12px}
+    .btn{background:var(--accent);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer}
+
+    @media (max-width:520px){header{gap:10px}.logo{width:56px;height:56px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">H✨</div>
+      <div>
+        <h1>Its Rockstar Dashing Harika's Birthday — Memory Page</h1>
+        <p class="lead">A small prank, a long drive, and lots of ice cream. Photos & video from the celebration.</p>
+      </div>
+    </header>
+
+    <section class="story">
+      <div class="row">
+        <div class="col">
+          <h2>About the Night</h2>
+          <p>We celebrated <strong>Harika</strong>'s birthday with our students — laughter, songs, and an unforgettable ice-cream party. We even pranked Karthik and his team by saying we were headed to <em>Mysore</em> for a palace night view; instead we enjoyed a fun drive to <strong>HSR Layout</strong> in the 2200 chariot.</p>
+          <p>We clicked photos, enjoyed an elevated flyover drive, had ice cream till <strong>1:30 AM</strong>, and then safely dropped everyone back at ALC. Big thanks to Harika and to all the students who made the night special.</p>
+          <p><strong>Highlights:</strong> Ice-cream jars, candid laughs, group photos, and warm memories.</p>
+        </div>
+        <div class="col">
+          <h3>Quick Info</h3>
+          <ul>
+            <li>Date: (your date here)</li>
+            <li>Place: HSR Layout — Ice cream spot</li>
+            <li>Group size: ~15–20 students</li>
+            <li>Video clip included with the photos</li>
+          </ul>
+          <div style="margin-top:8px">
+            <button class="btn" onclick="openSlideshow()">Open Slideshow</button>
+            <button class="btn" onclick="downloadAll()" style="background:#3b82f6">Download All</button>
+          </div>
+        </div>
+      </div>
+
+      <hr style="margin:18px 0;border:none;border-top:1px solid #eee" />
+
+      <h3>Photo Gallery</h3>
+      <div class="gallery" id="gallery">
+        <!-- thumbnails: place images in an "images/" folder next to this html file -->
+        <div class="thumb" data-src="images/DilMangeMore.jpg"><img src="images/DilMangeMore.jpg" alt="Dil Mange More"><div class="caption">Dil Mange More</div></div>
+        <div class="thumb" data-src="images/WhatDoYouWant.jpg"><img src="images/WhatDoYouWant.jpg" alt="What Do You Want"><div class="caption">What Do You Want?</div></div>
+        <div class="thumb" data-src="images/WonderfulHarika.jpg"><img src="images/WonderfulHarika.jpg" alt="Wonderful Harika"><div class="caption">Wonderful Harika</div></div>
+        <div class="thumb" data-src="images/IwantFourForSure.jpg"><img src="images/IwantFourForSure.jpg" alt="I Want Four"><div class="caption">I Want Four for Sure</div></div>
+        <div class="thumb" data-src="images/SmilesExceptMe.jpg"><img src="images/SmilesExceptMe.jpg" alt="Smiles Except Me"><div class="caption">Smiles Except Me</div></div>
+        <div class="thumb" data-src="images/Ready123Go.jpg"><img src="images/Ready123Go.jpg" alt="Ready 1-2-3"><div class="caption">Ready… 1-2-3 Go!</div></div>
+        <div class="thumb" data-src="images/Icecream_Colors.jpg"><img src="images/Icecream_Colors.jpg" alt="Icecream Colors"><div class="caption">Ice Cream Colors</div></div>
+        <div class="thumb" data-src="images/YouDidntComeOnThatDay4.jpg"><img src="images/YouDidntComeOnThatDay4.jpg" alt="You Didn't Come"><div class="caption">You Didn't Come (4)</div></div>
+        <div class="thumb" data-src="images/YouDidntComeOnThatDay2.jpg"><img src="images/YouDidntComeOnThatDay2.jpg" alt="You Didn't Come 2"><div class="caption">You Didn't Come (2)</div></div>
+      </div>
+
+      <div style="margin-top:18px">
+        <h3>Ice Cream Close-ups</h3>
+        <div class="media">
+          <div class="big"><img src="images/Icecream_Colors.jpg" alt="Icecream jars"></div>
+          <div style="flex:1 1 220px">
+            <img src="images/SmilesExceptMe.jpg" style="width:100%;border-radius:8px;" alt="Smiles">
+            <p style="color:var(--muted);margin-top:8px">Enjoying ice cream till late — tiny jars, big smiles.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr style="margin:18px 0;border:none;border-top:1px solid #eee" />
+
+      <h3>Group Photos</h3>
+      <p style="color:var(--muted)">Click any image to view larger.</p>
+      <div class="gallery" style="margin-top:12px">
+        <div class="thumb" data-src="images/Ready123Go.jpg"><img src="images/Ready123Go.jpg" alt="Group"><div class="caption">Group — Ready</div></div>
+        <div class="thumb" data-src="images/WonderfulHarika.jpg"><img src="images/WonderfulHarika.jpg" alt="Group 2"><div class="caption">Harika & the Gang</div></div>
+        <div class="thumb" data-src="images/YouDidntComeOnThatDay2.jpg"><img src="images/YouDidntComeOnThatDay2.jpg" alt="Group 3"><div class="caption">Late Night Crew</div></div>
+        <div class="thumb" data-src="images/YouDidntComeOnThatDay4.jpg"><img src="images/YouDidntComeOnThatDay4.jpg" alt="Group 4"><div class="caption">Pizza + Ice Cream</div></div>
+      </div>
+
+      <hr style="margin:18px 0;border:none;border-top:1px solid #eee" />
+
+      <h3>Video Clip</h3>
+      <p style="color:var(--muted)">Short clip from the night. Place the file <code>IdontKnowSaaar.mp4</code> into the same folder and it will play below.</p>
+      <div class="media" style="margin-top:8px">
+        <div class="big video">
+          <video controls width="100%" src="IdontKnowSaaar.mp4" poster="images/Ready123Go.jpg"></video>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <p>Made with ❤️ — Save this folder, keep the <code>images/</code> directory and the video file next to this HTML file. Want a downloadable PDF or a slideshow video? Click "Open Slideshow".</p>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)"><img id="lightboxImg" src="" alt=""></div>
+
+  <script>
+    const thumbs = document.querySelectorAll('.thumb');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    thumbs.forEach(t=>t.addEventListener('click', ()=>{const s=t.dataset.src; lbImg.src=s; lb.classList.add('open')}));
+    function closeLightbox(e){ if(e.target!==lbImg){ lb.classList.remove('open'); lbImg.src=''; }}
+
+    function openSlideshow(){
+      // simple auto-run slideshow in lightbox
+      const imgs = Array.from(document.querySelectorAll('.thumb')).map(t=>t.dataset.src);
+      if(!imgs.length) return alert('No images found');
+      let i=0; lbImg.src=imgs[i]; lb.classList.add('open');
+      window.slideshowInterval = setInterval(()=>{ i=(i+1)%imgs.length; lbImg.src=imgs[i]; },2500);
+      lb.onclick = function(e){ closeLightbox(e); clearInterval(window.slideshowInterval); lb.onclick=null }
+    }
+
+    function downloadAll(){
+      alert('Tip: Zip the images/ folder and the video file alongside this HTML to download or share.\nIf you want, I can prepare a ZIP for you.');
+    }
+  </script>
+</body>
+</html>
